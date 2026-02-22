@@ -4,6 +4,7 @@ import Header from "../Components/Header";
 import Skills from "./Skills";
 import Projects from "./Projects";
 import Education from "./Education";
+import Experience from "./Experience";
 import Contact from "./Contact";
 import Footer from "../Components/Footer";
 
@@ -20,8 +21,9 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <Skills />
       <Projects />
+      <Experience />
+      <Skills />
       <Education />
       <Contact />
       <Footer />
