@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Github, Linkedin, Facebook, Mail, Heart } from "lucide-react";
+import { usePortfolioData } from "../context/PortfolioDataContext";
 
 const Footer = () => {
+  const { data } = usePortfolioData();
   const currentYear = new Date().getFullYear();
 
   const footerLinks = [
@@ -15,18 +17,18 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { icon: Github, href: "https://github.com/abuzahed", label: "GitHub" },
+    { icon: Github, href: data.footer.socialLinks.github, label: "GitHub" },
     {
       icon: Linkedin,
-      href: "https://linkedin.com/in/abuzahed",
+      href: data.footer.socialLinks.linkedin,
       label: "LinkedIn",
     },
     {
       icon: Facebook,
-      href: "https://facebook.com/abuzahed",
+      href: data.footer.socialLinks.facebook,
       label: "Facebook",
     },
-    { icon: Mail, href: "mailto:zahed04x@gmail.com", label: "Email" },
+    { icon: Mail, href: data.footer.socialLinks.email, label: "Email" },
   ];
 
   const handleScrollClick = (e, scrollTo) => {
@@ -52,12 +54,10 @@ const Footer = () => {
           {/* About section */}
           <div>
             <h3 className="text-xl sm:text-2xl font-bold mb-3 md:mb-4 text-white">
-              Abu Zahed
+              {data.footer.name}
             </h3>
             <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
-              MERN Stack Developer passionate about building modern web
-              applications with cutting-edge technologies. Let's create
-              something amazing together!
+              {data.footer.about}
             </p>
           </div>
 
@@ -121,7 +121,7 @@ const Footer = () => {
         {/* Bottom section */}
           <div className="flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4">
             <p className="text-gray-500 text-xs sm:text-sm font-bold flex items-center gap-1 text-center md:text-left">
-              © {currentYear} Abu Zahed{" "}
+              © {currentYear} {data.footer.name}{" "}
               <Heart className="w-3 h-3 sm:w-4 sm:h-4 text-red-500 fill-red-500" />
             </p>
               

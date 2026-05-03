@@ -3,11 +3,13 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaGithub } from "react-icons/fa";
 import { Zap, ArrowUpRight } from "lucide-react";
+import { usePortfolioData } from "../context/PortfolioDataContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
 /* ─── Main Component ─────────────────────────────────────── */
 const Projects = () => {
+  const { data } = usePortfolioData();
   const sectionRef = useRef(null);
   const badgeRef = useRef(null);
   const titleRef = useRef(null);
@@ -15,47 +17,9 @@ const Projects = () => {
   const rowRefs = useRef([]);
   const lineRef = useRef(null);
 
-  const projects = [
-    {
-      id: 1,
-      title: "SmartBills",
-      subtitle: "(Bill Management Platform)",
-      description:
-        "A full-stack MERN platform for managing electricity, gas, water, and internet bills with secure payments and real-time tracking.",
-      tags: ["React.js", "Tailwind", "Firebase", "Express.js", "MongoDB", "React Router"],
-      image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=700&h=460&fit=crop",
-      github: "https://github.com/0xzahed/SmartBills-client",
-      live: "https://smartbills-7b06f.web.app/",
-      accent: "#14B8A6",
-      gradientStyle: "linear-gradient(135deg,#2dd4bf,#14B8A6,#10b981)",
-    },
-    {
-      id: 2,
-      title: "DeshiCart",
-      subtitle: "(E-Commerce Platform)",
-      description:
-        "An e-commerce platform with cart, checkout, authentication, and admin features built with Next.js and MongoDB.",
-      tags: ["Next.js", "React.js", "Tailwind", "Firebase", "Express.js", "MongoDB"],
-      image: "https://images.unsplash.com/photo-1557821552-17105176677c?w=700&h=460&fit=crop",
-      github: "https://github.com/0xzahed/deshicart",
-      live: "https://deshicart.vercel.app/",
-      accent: "#14B8A6",
-      gradientStyle: "linear-gradient(135deg,#2dd4bf,#14B8A6,#10b981)",
-    },
-    {
-      id: 3,
-      title: "SkillSwap",
-      subtitle: "(Skill Learning Platform)",
-      description:
-        "A React-based skill-learning platform connecting learners with expert tutors through an intuitive booking system and AI chatbot.",
-      tags: ["React.js", "React Router", "Firebase", "Tailwind CSS", "DaisyUI", "Framer Motion"],
-      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=700&h=460&fit=crop",
-      github: "https://github.com/0xzahed/Skill-Swap",
-      live: "https://skillswap-d2870.web.app/",
-      accent: "#14B8A6",
-      gradientStyle: "linear-gradient(135deg,#2dd4bf,#14B8A6,#10b981)",
-    },
-  ];
+  const accent = "#14B8A6";
+  const gradientStyle = "linear-gradient(135deg,#2dd4bf,#14B8A6,#10b981)";
+  const projects = data.projects;
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -180,13 +144,13 @@ const Projects = () => {
                   <div
                     className="timeline-dot hidden lg:flex absolute left-1/2 -translate-x-1/2 z-20 w-4 h-4 rounded-full border-2 items-center justify-center"
                     style={{
-                      borderColor: project.accent,
+                      borderColor: accent,
                       backgroundColor: "#0a0a0a",
-                      boxShadow: `0 0 12px ${project.accent}80`,
+                      boxShadow: `0 0 12px ${accent}80`,
                       opacity: 0,
                     }}
                   >
-                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: project.accent }} />
+                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: accent }} />
                   </div>
 
                   {/* Image */}
@@ -214,12 +178,12 @@ const Projects = () => {
                       {/* Connecting line to dot */}
                       <div
                         className={`hidden lg:block absolute top-1/2 -translate-y-1/2 w-10 h-px ${isEven ? "-right-10" : "-left-10"}`}
-                        style={{ backgroundColor: `${project.accent}60` }}
+                        style={{ backgroundColor: `${accent}60` }}
                       />
 
                       {/* Bottom bar */}
                       <div className="absolute bottom-0 left-0 right-0 h-1"
-                        style={{ background: project.gradientStyle }}
+                        style={{ background: gradientStyle }}
                       />
                     </div>
                   </div>
@@ -230,9 +194,9 @@ const Projects = () => {
                     style={{ opacity: 0 }}
                   >
                     <p className="text-xs font-bold uppercase tracking-[0.2em] mb-2"
-                      style={{ color: project.accent }}
+                      style={{ color: accent }}
                     >
-                      {project.subtitle}
+                      ({project.subtitle})
                     </p>
 
                     <h3 className="text-3xl sm:text-4xl font-black text-white mb-3">
@@ -241,7 +205,7 @@ const Projects = () => {
 
                     <div
                       className={`h-0.5 w-14 rounded-full mb-4 ${!isEven ? "lg:ml-auto" : ""}`}
-                      style={{ background: project.gradientStyle }}
+                      style={{ background: gradientStyle }}
                     />
 
                     <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-5">
@@ -255,8 +219,8 @@ const Projects = () => {
                           className="px-3 py-1 text-xs font-semibold rounded-full border"
                           style={{
                             color: project.accent,
-                            borderColor: `${project.accent}40`,
-                            backgroundColor: `${project.accent}12`,
+                            borderColor: `${accent}40`,
+                            backgroundColor: `${accent}12`,
                           }}
                         >
                           #{tag.toLowerCase().replace(/\s+/g, "")}

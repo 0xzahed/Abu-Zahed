@@ -9,8 +9,10 @@ import {
   Linkedin,
   Facebook,
 } from "lucide-react";
+import { usePortfolioData } from "../context/PortfolioDataContext";
 
 const Contact = () => {
+  const { data } = usePortfolioData();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -35,21 +37,21 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      value: "zahed04x@gmail.com",
-      link: "mailto:zahed04x@gmail.com",
+      value: data.contact.email,
+      link: `mailto:${data.contact.email}`,
       gradient: "from-teal-400 via-[#14B8A6] to-emerald-500",
     },
     {
       icon: Phone,
       title: "Phone",
-      value: "+880 1744-546898",
-      link: "tel:+8801744546898",
+      value: data.contact.phone,
+      link: `tel:${data.contact.phone.replace(/[^\d+]/g, "")}`,
       gradient: "from-teal-400 via-[#14B8A6] to-emerald-500",
     },
     {
       icon: MapPin,
       title: "Location",
-      value: "Dhaka, Bangladesh",
+      value: data.contact.location,
       link: "#",
       gradient: "from-teal-400 via-[#14B8A6] to-emerald-500",
     },
@@ -58,19 +60,19 @@ const Contact = () => {
   const socialLinks = [
     {
       icon: Github,
-      link: "https://github.com",
+      link: data.contact.socialLinks.github,
       label: "GitHub",
       gradient: "from-teal-400 via-[#14B8A6] to-emerald-500",
     },
     {
       icon: Linkedin,
-      link: "https://linkedin.com",
+      link: data.contact.socialLinks.linkedin,
       label: "LinkedIn",
       gradient: "from-teal-400 via-[#14B8A6] to-emerald-500",
     },
     {
       icon: Facebook,
-      link: "https://facebook.com",
+      link: data.contact.socialLinks.facebook,
       label: "Facebook",
       gradient: "from-teal-400 via-[#14B8A6] to-emerald-500",
     },

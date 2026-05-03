@@ -10,6 +10,7 @@ const CustomCursor = () => {
     useEffect(() => {
         // Only show on non-touch devices
         if (window.matchMedia("(pointer: coarse)").matches) return;
+        document.body.classList.add("custom-cursor-enabled");
 
         const dot = dotRef.current;
         const ring = ringRef.current;
@@ -124,6 +125,7 @@ const CustomCursor = () => {
         observer.observe(document.body, { childList: true, subtree: true });
 
         return () => {
+            document.body.classList.remove("custom-cursor-enabled");
             window.removeEventListener("mousemove", onMouseMove);
             document.removeEventListener("mouseleave", onMouseLeave);
             document.removeEventListener("mouseenter", onMouseEnter);

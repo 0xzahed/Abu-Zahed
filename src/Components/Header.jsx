@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { Github, Linkedin, Mail, Download } from "lucide-react";
 import { gsap } from "gsap";
 import profilePhoto from "../assets/Profile-photo.png";
+import { usePortfolioData } from "../context/PortfolioDataContext";
 
 const Header = () => {
+  const { data } = usePortfolioData();
   const headerRef = useRef(null);
   const badgeRef = useRef(null);
   const headingRef = useRef(null);
@@ -104,7 +106,7 @@ const Header = () => {
                 <span className="relative inline-flex rounded-full h-full w-full bg-teal-500"></span>
               </span>
               <span className="text-xs sm:text-sm text-teal-300 font-medium">
-                Available for work
+                {data.header.availabilityText}
               </span>
             </div>
 
@@ -115,24 +117,21 @@ const Header = () => {
                 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
                 style={{ opacity: 0 }}
               >
-                Hi, I'm <span className="bg-linear-to-r from-teal-400 via-[#14B8A6] to-emerald-500 bg-clip-text text-transparent">Abu Zahed</span>
+                Hi, I'm <span className="bg-linear-to-r from-teal-400 via-[#14B8A6] to-emerald-500 bg-clip-text text-transparent">{data.header.name}</span>
               </h1>
               <h2
                 ref={subheadingRef}
                 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-300"
                 style={{ opacity: 0 }}
               >
-                MERN Stack Developer
+                {data.header.role}
               </h2>
               <p
                 ref={descRef}
                 className="text-sm sm:text-base lg:text-lg text-gray-400 max-w-xl leading-relaxed mx-auto lg:mx-0"
                 style={{ opacity: 0 }}
               >
-                Passionate about building dynamic and scalable web applications
-                using MongoDB, Express.js, React, and Node.js. I love turning
-                ideas into reality through clean, efficient code and creating
-                user-friendly interfaces that make a difference.
+                {data.header.description}
               </p>
             </div>
 
@@ -143,7 +142,7 @@ const Header = () => {
               style={{ opacity: 0 }}
             >
               <Link
-                to="/resume"
+                to={data.header.resumePath}
                 className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-linear-to-r from-teal-500 via-[#14B8A6] to-teal-600 backdrop-blur-sm border border-teal-400/50 text-white text-sm sm:text-base font-semibold rounded-full hover:from-teal-400 hover:via-teal-500 hover:to-emerald-500 hover:shadow-lg hover:shadow-teal-500/50 transition-all duration-300"
               >
                 <Download className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -161,7 +160,7 @@ const Header = () => {
               </span>
               <div className="flex gap-2 sm:gap-3" style={{ opacity: 0 }}>
                 <a
-                  href="https://github.com/0xzahed"
+                  href={data.header.socialLinks.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 sm:p-3 rounded-full bg-gray-800/80 border border-blue-500/20 text-gray-300 hover:text-white hover:bg-gray-700 hover:border-blue-500 transition-all duration-300 hover:scale-110"
@@ -169,7 +168,7 @@ const Header = () => {
                   <Github className="w-4 h-4 sm:w-5 sm:h-5" />
                 </a>
                 <a
-                  href="https://linkedin.com"
+                  href={data.header.socialLinks.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 sm:p-3 rounded-full bg-gray-800/80 border border-blue-500/20 text-gray-300 hover:text-white hover:bg-indigo-600 hover:border-blue-500 transition-all duration-300 hover:scale-110"
@@ -177,7 +176,7 @@ const Header = () => {
                   <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
                 </a>
                 <a
-                  href="mailto:zahed04x@gmail.com"
+                  href={data.header.socialLinks.email}
                   className="p-2 sm:p-3 rounded-full bg-gray-800/80 border border-blue-500/20 text-gray-300 hover:text-white hover:bg-gray-700 hover:border-blue-500 transition-all duration-300 hover:scale-110"
                 >
                   <Mail className="w-4 h-4 sm:w-5 sm:h-5" />

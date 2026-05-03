@@ -2,10 +2,12 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Briefcase, Calendar, MapPin, Code2 } from "lucide-react";
+import { usePortfolioData } from "../context/PortfolioDataContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Experience = () => {
+    const { data } = usePortfolioData();
     const sectionRef = useRef(null);
     const badgeRef = useRef(null);
     const titleRef = useRef(null);
@@ -14,23 +16,7 @@ const Experience = () => {
     const responsibilitiesRef = useRef([]);
     const footerRef = useRef(null);
 
-    const experience = {
-        role: "Trainee Software Engineer",
-        company: "Betopia Limited",
-        location: "Bangladesh",
-        period: "2025 - Present",
-        status: "Current",
-        description:
-            "Recently joined as a Trainee Software Engineer, contributing to software development projects and collaborating with the team to build and maintain web applications. Gaining hands-on experience in real-world software engineering practices.",
-        responsibilities: [
-            "Developing and maintaining web applications",
-            "Collaborating with senior engineers on feature development",
-            "Learning industry-standard development workflows and best practices",
-            "Participating in code reviews and team discussions",
-        ],
-        gradient: "from-teal-400 via-[#14B8A6] to-emerald-500",
-        icon: "💻",
-    };
+    const experience = data.experience;
 
     useEffect(() => {
         const ctx = gsap.context(() => {

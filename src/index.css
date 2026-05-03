@@ -5,6 +5,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+  }
+
+  body.custom-cursor-enabled,
+  body.custom-cursor-enabled * {
     cursor: none !important;
   }
 

@@ -2,10 +2,12 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { GraduationCap, Calendar, MapPin, Award } from "lucide-react";
+import { usePortfolioData } from "../context/PortfolioDataContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Education = () => {
+  const { data } = usePortfolioData();
   const sectionRef = useRef(null);
   const badgeRef = useRef(null);
   const titleRef = useRef(null);
@@ -14,34 +16,11 @@ const Education = () => {
   const progressBarsRef = useRef([]);
   const footerRef = useRef(null);
 
-  const education = [
-    {
-      id: 1,
-      degree: "BSc in Computer Science & Engineering",
-      institution: "Daffodil International University",
-      location: "Dhaka, Bangladesh",
-      period: "2022 - 2025",
-      status: "Completed",
-      description:
-        "Graduated with a strong foundation in core computer science concepts including DSA, OOP, and full-stack web development, with a focus on building scalable applications.",
-      gradient: "from-teal-400 via-[#14B8A6] to-emerald-500",
-      gradientStyle: "linear-gradient(to right, #2dd4bf, #14B8A6, #10b981)",
-      icon: "🎓",
-    },
-    {
-      id: 2,
-      degree: "Higher Secondary Certificate (HSC)",
-      institution: "Shahsultan College",
-      location: "Bogura, Bangladesh",
-      period: "Passing Year: 2020",
-      status: "Completed",
-      description:
-        "Completed secondary education with a strong foundation in humanities, developing critical thinking and communication skills.",
-      gradient: "from-teal-400 via-[#14B8A6] to-emerald-500",
-      gradientStyle: "linear-gradient(to right, #2dd4bf, #14B8A6, #10b981)",
-      icon: "📚",
-    },
-  ];
+  const education = data.education.map((item) => ({
+    ...item,
+    gradient: "from-teal-400 via-[#14B8A6] to-emerald-500",
+    gradientStyle: "linear-gradient(to right, #2dd4bf, #14B8A6, #10b981)",
+  }));
 
   useEffect(() => {
     const ctx = gsap.context(() => {
